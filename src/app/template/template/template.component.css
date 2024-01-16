@@ -1,0 +1,70 @@
+
+
+.header {
+    grid-area: header;
+    background: #353535;
+    border-bottom: 2px solid rgba(255, 255,255, 0.1);
+}
+
+.menu {
+    grid-area: menu;
+    background: #353535;
+}
+
+.conteudo {
+    grid-area: conteudo;
+    background: #FFFFFF;
+    overflow: auto;
+}
+
+.rodape {
+    grid-area: rodape;
+    background: #353535;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255,255, 0.1);
+}
+
+.geral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 60px 1fr 50px;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas: 
+      "header header"
+      "menu conteudo" 
+      "menu rodape";
+  }
+  
+
+  @media only screen and (max-width: 600px) {
+    .menu {
+      display: block;
+      position: fixed;
+      padding-top: 60px;
+      height: 100vh;
+      z-index: 1;
+      transition: all linear 300ms;
+      left: -300px;
+    }   
+    .header {
+        z-index: 2;
+    }
+    .geral {
+        grid-template-areas: 
+          "header header"
+          "conteudo conteudo" 
+          "rodape rodape";
+      }
+  }
+  
+
+  .menuShow {
+    left: 0;
+  }

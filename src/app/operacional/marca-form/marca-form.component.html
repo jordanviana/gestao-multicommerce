@@ -1,0 +1,71 @@
+<page-template [loading]="loading" icon="fas fa-newspaper" titulo="Nova Marca"
+    descricao="Cadastro e edição de marca.">
+    <form [formGroup]="form" class="row" *ngIf="!loading">
+        <div class="col-md">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Categoria</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <input-group class="col" label="Selecione a categoria">
+                                    <select class="form-select form-control" formControlName="categoria">
+                                        <option value="">Selecione...</option>
+                                        <option [value]="categoria._id" *ngFor="let categoria of categorias">
+                                            {{categoria.nome}}</option>
+                                    </select>
+                                </input-group>
+                            </div>
+                            <div class="row" *ngIf="!form.get('categoria').value && !id">
+                                <input-group class="col-md-6" label="Nova Categoria">
+                                    <input type="text" class="form-control" formControlName="nova_categoria">
+                                </input-group>
+                                <div class="col-md" label="" style="display: flex; align-items: center;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="ativo"
+                                            formControlName="nova_categoria_destaque">
+                                        <label class="form-check-label" for="ativo">
+                                            Destaque
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input-group class="col-md-6" label="Nome">
+                    <input formControlName="nome" type="text" class="form-control">
+                </input-group>
+                <div class="col-md" label="" style="display: flex; align-items: center;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ativo" formControlName="destaque">
+                        <label class="form-check-label" for="ativo">
+                            Destaque
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input-group class="col-md" label="Nome de exibição">
+                    <input formControlName="nome_exibe" type="text" class="form-control">
+                </input-group>
+            </div>
+            <div class="row input-group py-4">
+                <div class="col-md-12">
+                    <button (click)="salvar()" [disabled]="form.invalid || loading" class="btn btn-primary btn-margem">
+                        <text-spinner [loading]="loading">
+                            Salvar
+                        </text-spinner>
+                    </button>
+                    <button-back class="btn-margem">
+                        Cancelar
+                    </button-back>
+                </div>
+            </div>
+        </div>
+    </form>
+</page-template>

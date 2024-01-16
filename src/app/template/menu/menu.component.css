@@ -1,0 +1,66 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    color: #FBFFF1;
+    height: 100%;
+    overflow-x: auto !important;
+}
+
+
+.item-menu i {
+    width: 40px;
+    text-align: center;
+}
+.item-menu:hover {
+    background: #7E7E7E;
+}
+.item-menu {
+    cursor: pointer;
+    height: 50px;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255, 0.1);
+    border-bottom: 1px solid rgba(255,255,255, 0.1);
+}
+.item-menu {
+    display: flex;
+}
+
+.box-usuario {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.box-foto, .box-botao, .box-nome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box-nome {
+    width: 100%;
+    flex-direction: column;
+}
+.cidade {
+    font-size: 12px;
+}
+
+.box-foto, .box-botao {
+    width: 60px;
+    font-size: 20px;
+}
+
+.sub {
+    background: #474747;
+    padding-left: 20px;
+}
+
+
+.menu-callapso {
+    max-height:0;
+    overflow: hidden;
+    transition: all linear 300ms !important;
+}
+
+.openMenu {
+    max-height: 50px;
+}

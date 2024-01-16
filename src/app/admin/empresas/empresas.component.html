@@ -1,0 +1,25 @@
+<page-template icon="fas fa-house-user" [loading]="loading" titulo="Empresas" descricao="Pesquisa de Empresas">
+    <tabela-pesquisa-template [loading]="loading" [total]="total" linknovo="/admin/empresas/empresa-form">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Cod</th>
+                <th class="text-center" scope="col">Nome</th>
+                <th class="text-center" scope="col">Ativo</th>
+                <th class="text-center" scope="col">Criado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let empresa of lista" class="pointer" [ngClass]="{'table-danger': !empresa.ativo}" routerLink="/admin/empresa/form" [queryParams]="{_id: empresa._id }">
+                <th class="text-center"> {{empresa.cod}} </th>
+                <td class="text-center"> {{empresa.nome}} </td>
+                <td class="text-center">
+                  <i *ngIf="empresa.ativo" class="fas fa-check"></i>
+                  <i *ngIf="!empresa.ativo" class="text-danger fas fa-ban"></i>
+                </td>
+                <td class="text-center"> {{empresa.createdAt | dataHoraBr}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </tabela-pesquisa-template>
+</page-template>

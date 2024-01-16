@@ -1,0 +1,83 @@
+<page-template [loading]="loading" icon="fas fa-newspaper" [titulo]="title" [descricao]="descricao">
+    <div class="clientes">
+        <form [formGroup]="formGroup" class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <input-group class="col-md" label="Nome">
+                        <input formControlName="nome" [disabled]="loading" type="text" class="form-control">
+                    </input-group>
+                    <input-group class="col-md" label="Login">
+                        <input formControlName="username" [readOnly]="id" placeholder="Nome de usuário" type="text"
+                            class="form-control">
+                    </input-group>
+                </div>
+                <div class="row">
+                    <input-group class="col-md" label="Senha">
+                        <input formControlName="senha" type="password" class="form-control" placeholder="Senha"
+                            [disabled]="loading"
+                            [ngClass]="{'is-invalid': formGroup.get('senha').invalid || getErros('senha')['minLength'], 'is-valid' : formGroup.get('senha').valid}">
+                        <div class="invalid-feedback" *ngIf="formGroup.get('senha').invalid">Mínimo de 4 caracteres.
+                        </div>
+                        <!-- <div class="invalid-feedback" *ngIf="getErros()['notSame']">Senhas não são iguais.</div> -->
+                    </input-group>
+                    <input-group class="col-md" label="Confirmar Senha">
+                        <input formControlName="senha2" type="password" class="form-control"
+                            placeholder="Repita a senha" [disabled]="loading"
+                            [ngClass]="{'is-invalid': formGroup.get('senha2').invalid || getErros()['notSame'], 'is-valid' : formGroup.get('senha2').valid}">
+                        <div class="invalid-feedback" *ngIf="getErros('senha2')['minLength']">Mínimo de 4 caracteres.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="getErros()['notSame']">Senhas não são iguais.</div>
+                    </input-group>
+                </div>
+                <div class="row py-4">
+                    <div class="col-md-4" label="">
+                        <div class="form-check">
+                            <input formControlName="ativo" class="form-check-input" type="checkbox" id="ativo">
+                            <label class="form-check-label" for="ativo">
+                                Ativo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>Empresas e Perfis</h3>
+                        <button (click)="addEmpresa()" class="btn btn-success m-2">
+                           <i class="fas fa-plus"></i>
+                          </button>
+                    </div>
+                </div>
+                <div class="card m-1" *ngFor="let control of formGroup['controls']['empresas']['controls']; let i = index">
+                    <div class="card-body row">
+                        <input-group class="col-md" label="Empresa">
+                            <select class="form-control" [formControl]="control.controls['empresa']">
+                                <option [value]="item._id" *ngFor="let item of empresas">
+                                    {{item.nome}}
+                                </option>
+                            </select>
+                        </input-group>
+                        <input-group class="col-md" label="Perfil">
+                            <select class="form-control" [formControl]="control.controls['perfil']">
+                                <option [value]="item._id" *ngFor="let item of perfis">
+                                    {{item.nome}}
+                                </option>
+                            </select>
+                        </input-group>
+                        <button (click)="removeEmpresa(i)" class="btn btn-danger m-3">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        <button class="btn btn-primary m-1">
+                            <text-spinner [loading]="loading" (click)="salvar()">Salvar</text-spinner>
+                        </button>
+                        <button class="btn btn-light m-1">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</page-template>
+<btn-print></btn-print>

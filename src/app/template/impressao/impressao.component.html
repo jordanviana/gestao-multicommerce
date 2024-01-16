@@ -1,0 +1,171 @@
+<div class="container" style="padding-top: 5%;" *ngIf="lista">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>
+                {{titulo}}
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Empresa:</b> {{empresa}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Impresso:</b> {{dataImpressao | date: "dd/MM/yyyy HH:mm"}}
+        </div>
+    </div>
+    <table class="table table-sm table-striped mt-2 trpointer">
+        <thead>
+            <tr>
+                <th scope="col" *ngFor="let item of header">{{item}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lista">
+                <th scope="row">{{item.data | date: "dd/MM/yyyy"}}</th>
+                <td *ngIf="item.ponto">{{item.ponto.cod}} - {{item.ponto.nome}}  </td>
+                <td *ngIf="item.sessao"> {{item.sessao.cod}} - {{item.sessao.nome}} </td>
+                <td> {{item.tipo.descricao}} - {{item.tipo.credito === true ? "Créd." : "Deb."}}
+                    {{item.obs ? item.obs : ""}} </td>
+                <td> {{item.horario ? item.horario.sigla : ""}} </td>
+                <td> {{item.valor | currency:'BRL': true }}</td>
+                <td>{{item.usuario ? item.usuario.username : ""}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row rel-totais">
+        <div class="col-6" *ngIf="lista.length <= 1">{{lista.length}}: Movimento</div>
+        <div class="col-6" *ngIf="lista.length > 1">{{lista.length}}: Movimentos</div>
+        <div class="col-2 text-right"> {{somaValores() | currency:'BRL': true }} </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="sorteio">
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header text-center">
+                {{sorteio.data | date: "dd/MM/yyyy"}} - {{sorteio.horario_desc}}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let p of sorteio.premios">
+                    <div class="row">
+                        <div style="width: 40px; height: auto; padding-left: 8px;">
+                            {{p.premio}}º
+                        </div>
+                        <div style="width: 70px; height: auto;">
+                            {{p.dados}}
+                        </div>
+                        <div>
+                            {{p.grupo}} 
+                        </div>
+                        <div class="col text-right pl-0 pr-2">
+                            {{p.bicho}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="listaPainel">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>{{titulo}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Empresa:</b> {{empresa}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Operador: </b> {{header.cod}} - {{header.nome}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Data: </b> {{header.data | date: "dd/MM/yyyy"}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Horário: </b> {{header.sigla === "false" ? "" : header.sigla}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <b>Impresso:</b> {{dataImpressao | date: "dd/MM/yyyy HH:mm"}}
+        </div>
+    </div>
+    <div class="vendas">
+        <div class="row linha" *ngFor="let item of listaPainel">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="label">
+                            Pulice
+                        </div>
+                        <div class="value">
+                            {{item.cod}}
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="label">
+                            Valor
+                        </div>
+                        <div class="value">
+                            {{item.valor_bruto | currency: "BRL"}}
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="label">
+                            Prêmio
+                        </div>
+                        <div class="value text-danger">
+                            <b *ngIf="item.premios > 0">
+                                {{item.premios | currency: "BRL"}}
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row linha total">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="label">
+                            Pules
+                        </div>
+                        <div class="value">
+                            {{lista ? lista.length : ""}} pules
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="label">
+                            Total
+                        </div>
+                        <div class="value">
+                            {{totais.venda | currency: "BRL"}}
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="label">
+                            Prêmio
+                        </div>
+                        <div class="value">
+                            <b> {{totais.premio | currency: "BRL"}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<btn-print></btn-print>

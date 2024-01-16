@@ -1,0 +1,11 @@
+.big-checkbox{
+    padding-top: 13px;
+     padding-left: 6px;
+}
+
+.big-checkbox::before, 
+.big-checkbox::after {
+  top: .8rem;
+  width: 1.55rem;
+  height: 1.55rem;
+}

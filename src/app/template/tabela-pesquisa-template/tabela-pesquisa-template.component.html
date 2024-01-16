@@ -1,0 +1,48 @@
+<div class="tabela-pesquisa">
+    <div class="row">
+        <div class="col-md-12 form-group line-input" *ngIf="!hidesearch">
+            <div class="box-input pr-2">
+                <input type="text" class="form-control" #ibusca placeholder="Pesquise..." (keyup)="buscar($event.target.value)">
+            </div>
+            <div class="box-input" *ngIf="data">
+                <input type="date" class="form-control" [(ngModel)]="iData">
+            </div>
+            <button class="btn btn-primary btn-line" type="submit" (click)="buscar(ibusca.value)">
+                <text-spinner [loading]="loading">
+                    <i class="fas fa-search"></i>
+                </text-spinner>
+            </button>
+            <button *ngIf="linknovo" class="btn btn-info btn-line" [routerLink]="linknovo" >
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <ng-content></ng-content>
+        </div>
+    </div>
+    <div *ngIf="total" class="row">
+        <div class="col-md-12">
+            <nav>
+                <ul class="pagination justify-content-end">
+                    <li class="page-item">
+                        <span class="page-link"  aria-label="Previous" (click)="clickPage(pagina - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </span>
+                    </li>
+                    <li *ngFor="let item of getButtons()" class="page-item" [ngClass]="{'active': pagina+1 == item}" >
+                        <span class="page-link" (click)="clickPage(item -1)">
+                            {{item}}
+                        </span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link" aria-label="Next" (click)="clickPage(pagina + 1)" >
+                            <span aria-hidden="true">&raquo;</span>
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

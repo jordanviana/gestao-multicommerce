@@ -1,0 +1,11 @@
+.btn-print {
+    position: absolute;
+    right: 20px;
+    top: 10%;
+}
+
+@media print {
+    .btn-print {
+        display: none;
+    }
+}

@@ -1,0 +1,247 @@
+<page-template [loading]="loading" icon="fas fa-newspaper" titulo="Novo produto"
+    descricao="Cadastro e edição de produtos">
+    <form [formGroup]="form" class="row" *ngIf="!loading">
+        <div class="col-md">
+            <div class="row mb-3">
+                <div class="col-md mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Categoria</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <input-group class="col" label="Selecione a categoria">
+                                    <select class="form-select form-control" formControlName="categoria"
+                                        (change)="filter('cat', $event.target.value)">
+                                        <option value="">Selecione...</option>
+                                        <option [value]="categoria._id" *ngFor="let categoria of categorias">
+                                            {{categoria.nome}}</option>
+                                    </select>
+                                </input-group>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button class="btn btn-outline-primary" data-toggle="modal"
+                                        data-target="#modal-cadastro" (click)="setModal('categoria')">
+                                        Nova Cat.
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Sub. Cat.</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <input-group class="col" label="Selecione a sub categoria">
+                                    <select class="form-select form-control" formControlName="subcategoria"
+                                        (change)="filter('subcat', $event.target.value)">
+                                        <option value="">Selecione...</option>
+                                        <option [value]="categoria._id" *ngFor="let categoria of filteredSubcategorias">
+                                            {{categoria.nome}}</option>
+                                    </select>
+                                </input-group>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button class="btn btn-outline-primary" data-toggle="modal"
+                                        [disabled]="!form.get('categoria').value" data-target="#modal-cadastro"
+                                        (click)="setModal('subcategoria')">Novo Sub.
+                                        Cat.</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Tipo produto</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <input-group class="col" label="Selecione o tipo de produto">
+                                    <select class="form-select form-control" formControlName="tipoproduto">
+                                        <option value="">Selecione...</option>
+                                        <option [value]="tipo._id" *ngFor="let tipo of filteredTipoprodutos">
+                                            {{tipo.nome}}</option>
+                                    </select>
+                                </input-group>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button class="btn btn-outline-primary" data-toggle="modal"
+                                        [disabled]="!form.get('subcategoria').value" data-target="#modal-cadastro"
+                                        (click)="setModal('tipoproduto')">Novo Tipo
+                                        Prod.</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Marca</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <input-group class="col" label="Selecione a marca do produto">
+                                    <select class="form-select form-control" formControlName="marca">
+                                        <option value="">Selecione...</option>
+                                        <option [value]="marca._id" *ngFor="let marca of filteredMarcas">
+                                            {{marca.nome}}</option>
+                                    </select>
+                                </input-group>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button class="btn btn-outline-primary" data-toggle="modal"
+                                        [disabled]="!form.get('categoria').value" data-target="#modal-cadastro"
+                                        (click)="setModal('marca')">Nova marca</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input-group class="col-md-6" label="Nome">
+                    <input formControlName="nome" type="text" class="form-control">
+                </input-group>
+                <div class="col-md" label="" style="display: flex; align-items: center;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ativo" formControlName="destaque">
+                        <label class="form-check-label" for="ativo">
+                            Destaque
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row mb-2">
+                <div class="col-md" label="">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="destaque" formControlName="destaque">
+                        <label class="form-check-label" for="destaque">
+                            Destaque
+                        </label>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <input-group class="col-md-6" label="Nome Destaque">
+                    <input formControlName="nome_destaque" type="text" class="form-control">
+                </input-group>
+                <input-group class="col-md-6" label="Ref.">
+                    <input formControlName="ref" type="text" class="form-control">
+                </input-group>
+            </div>
+            <div class="row">
+                <input-group class="col-md" label="Descrição do produto">
+                    <textarea formControlName="descricao" type="text" class="form-control"></textarea>
+                </input-group>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Imagens</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+                                        Adicionar imagem
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" *ngFor="let imagem of imagens; let i = index">
+                                    <div class="text-center divimagens m-2">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <img [src]="imagem.file || imagem.url" class="img-thumbnail" (click)="zoomImage(i.file || i.url)">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <button type="button" class="btn btn-outline-danger" (click)="deleteImagem(i)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row input-group py-4">
+                <div class="col-md-12">
+                    <button (click)="salvar()" [disabled]="form.invalid || loading" class="btn btn-primary btn-margem">
+                        <text-spinner [loading]="loading">
+                            Salvar
+                        </text-spinner>
+                    </button>
+                    <button-back class="btn-margem">
+                        Cancelar
+                    </button-back>
+                </div>
+            </div>
+        </div>
+    </form>
+    <modal idModal="modal-cadastro" [modal_title]="modal.title">
+        <form [formGroup]="formModal" class="row">
+            <div class="col-md">
+                <div class="row" *ngIf="!loading_modal">
+                    <input-group class="col-md" label="Nome">
+                        <input formControlName="nome" type="text" class="form-control">
+                    </input-group>
+                </div>
+                <div class="row" *ngIf="!loading_modal">
+                    <input-group class="col-md" label="Nome de exibição">
+                        <input formControlName="nome_exibe" type="text" class="form-control">
+                    </input-group>
+                </div>
+                <div class="row" *ngIf="!loading_modal">
+                    <div class="col-md" label="">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="ativo"
+                                formControlName="destaque">
+                            <label class="form-check-label" for="ativo">
+                                Destaque
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row m-2">
+                    <div class="col text-center">
+                        <button (click)="salvarModal()" [disabled]="formModal.invalid || loading_modal"
+                            class="btn btn-outline-primary btn-margem w-100">
+                            <text-spinner [loading]="loading_modal">
+                                Salvar
+                            </text-spinner>
+                        </button>
+                    </div>
+                </div>
+                <div class="row m-2" *ngIf="!loading_modal">
+                    <div class="col text-center">
+                        <button class="btn-margem btn btn-outline-danger w-100" (click)="fecharModal(true)">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </modal>
+    <input #fileInput type="file" accept="image/png, image/jpeg" multiple
+  style="position: absolute; top: 0px; left: 0; z-index: -1000;" (change)="fileChangeEvent($event.target.files)">
+</page-template>

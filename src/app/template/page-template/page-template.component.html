@@ -1,0 +1,14 @@
+<div class="page-template">
+    <div class="topo">
+        <h1>
+            <i *ngIf="!loading" class="shadow-text" [class]="icon"></i>
+            <i *ngIf="loading" class="fas fa-sync fa-spin shadow-text"></i>
+            <span class="shadow-text" >{{titulo}}</span>
+        </h1>
+        <h5>
+            {{descricao}}
+        </h5>
+    </div>
+    <hr>
+    <ng-content></ng-content>
+</div>

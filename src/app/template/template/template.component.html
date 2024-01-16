@@ -1,0 +1,14 @@
+<div class="geral">
+    <div class="header">
+        <app-header></app-header>
+    </div>
+    <div class="menu" [ngClass]="{'menuShow': menu.show}">
+        <app-menu></app-menu>
+    </div>
+    <div class="conteudo">
+        <ng-content></ng-content>
+    </div>
+    <div class="rodape">
+        <app-rodape></app-rodape>
+    </div>
+</div>

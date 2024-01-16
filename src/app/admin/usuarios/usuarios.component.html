@@ -1,0 +1,25 @@
+<page-template icon="fas fa-house-user" [loading]="loading" [titulo]="title" [descricao]="descricao">
+    <div class="clientes">
+      <tabela-pesquisa-template [loading]="loading" [total]="total" linknovo="/admin/usuarioform">
+        <table class="table table-striped table-sm trpointer">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Login</th>
+              <th scope="col">Criado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lista" [ngClass]="{'table-danger': !item.ativo}" routerLink="/admin/usuario/form"
+              [queryParams]="{_id: item._id }">
+              <th scope="row"> {{item.nome}} </th>
+              <td> {{item.username}} </td>
+              <td> {{item.createdAt | dataHoraBr}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </tabela-pesquisa-template>
+    </div>
+  </page-template>
+  <btn-print></btn-print>
+  

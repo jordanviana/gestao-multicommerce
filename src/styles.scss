@@ -1,0 +1,94 @@
+/* You can add global styles to this file, and also import other style files */
+
+// import in the bootstrap SASS file
+
+:root {
+  --cor-principal: #c91517;
+  --cor-r: 201;
+  --cor-g: 21;
+  --cor-b: 23;
+}
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.btn-primary {
+  background-color: var(--cor-principal) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+input:focus {
+  border-color: rgba(var(--cor-r), var(--cor-g), var(--cor-b), 0.8) !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0 0 8px rgba(var(--cor-r), var(--cor-g), var(--cor-b), 0.6) !important;
+  outline: 0 none !important;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+* {
+  font-family: "Saira", sans-serif;
+}
+
+.btn-margem {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.trpointer tr {
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.prtitulo {
+  font-size: 30px;
+  font-weight: bold;
+}
+.prsubtitulo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .prtitulo {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .prsubtitulo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .relresponse {
+    font-size: 0.4em;
+  }
+}
+
+@media print {
+  .pagebreak {
+    page-break-after: always !important;
+  }
+}
+
+@font-face {
+  font-family: "Bontang";
+  src: url("assets/fonts/Bontang.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+input[type="checkbox"] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}

@@ -1,0 +1,12 @@
+.card-header{
+    padding: 0.5rem 1.25rem;
+}
+
+.divimagens{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.img-thumbnail {
+    height: 150px;
+  }

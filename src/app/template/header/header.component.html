@@ -1,0 +1,30 @@
+<div class="header">
+    <div class="btn-menu" (click)="menu.show = !menu.show">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div [class]="template.getSite().classicon">
+        <a [routerLink]="'/'">
+          <img [src]="template.getSite().logo" alt="" class="src" width="60" height="50">
+        </a>
+    </div>
+    <div class="btn-empresas" (click)="menu.showEmpresas = !menu.showEmpresas" >
+      <div class="box-empresa">
+        <div class="icon">
+          <text-spinner [loading]="usuario.loadingEmpresa" >
+            <i class="fas fa-building"></i>
+          </text-spinner>
+        </div>
+        <div class="nome-usuario" *ngIf="usuario.sessao && usuario.sessao.usuario && usuario.sessao.usuario.nome" >
+          {{usuario.sessao.usuario.nome}}
+        </div>
+        <div class="nome-empresa" *ngIf="usuario.sessao && usuario.sessao.usuario && usuario.sessao.usuario.empresa && usuario.sessao.usuario.empresa.nome" >
+          {{usuario.sessao.usuario.empresa.nome}}
+        </div>
+      </div>
+      <div [ngClass]="{'closeEmpresas': !menu.showEmpresas}" class="box-empresas">
+        <div *ngFor="let item of usuario.getEmpresas(); let i = index" (click)="usuario.setAlteraEmpresa(i)" class="item">
+          {{item.nome}}
+        </div>
+      </div>
+    </div>
+</div>

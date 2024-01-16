@@ -1,0 +1,25 @@
+<page-template [loading]="loading" icon="fas fa-newspaper" titulo="Nova Empresa"
+    descricao="Cadastro e edição de Empresas">
+    <form [formGroup]="formGroup" class="row">
+        <div class="col-md">
+            <div class="row">
+                <input-group class="col-md" label="Cod.">
+                    <input formControlName="cod" type="text" class="form-control">
+                </input-group>
+                <input-group class="col-md" label="Nome">
+                    <input formControlName="nome" type="text" class="form-control">
+                </input-group>
+            </div>
+            <div class="row">
+                <div class="col-md" label="">
+                    <div class="form-check">
+                        <input formControlName="ativo" class="form-check-input" type="checkbox" id="ativo">
+                        <label class="form-check-label" for="ativo">
+                            Ativo
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</page-template>

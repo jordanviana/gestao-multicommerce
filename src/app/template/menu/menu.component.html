@@ -1,0 +1,40 @@
+<div class="menu">
+    <div class="box-usuario">
+        <div class="box-foto">
+            <i class="fas fa-user pie"></i>
+        </div>
+        <div class="box-nome">
+            <div *ngIf="api.sessao && api.sessao.usuario && api.sessao.usuario.nome" class="nome">
+                {{api.sessao.usuario.nome}}
+            </div>
+            <div *ngIf="api.sessao && api.sessao.usuario && api.sessao.usuario.empresa && api.sessao.usuario.empresa.nome " class="cidade">
+                {{api.sessao.usuario.empresa.nome}}
+            </div>
+        </div>
+        <div class="box-botao">
+            <i class="fas fa-building"></i>
+        </div>
+    </div>
+    <div class="box-menu">
+        <div *ngFor="let itemM of getMenus()" class="item">
+            <div class="item-menu" (click)="clickMenu(itemM);" [routerLink]="itemM.link || null" >
+                <i [class]="itemM.icon"></i>
+                <div class="label"> {{itemM.descricao}}</div>
+            </div>
+            <div class="sub-item-menu">
+                <div *ngFor="let item of getMenus(itemM.id)"   (click)="clickMenu(item)" class="menu-callapso" [routerLink]="item.link" [ngClass]="{'openMenu': menusOpen[itemM.id]}">
+                    <div class="item-menu sub">
+                        <i [class]="item.icon"></i>
+                        <div class="label"> {{template.getSite().getLabel(item.descricao)}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-menu" [routerLink]="'/logoff'" >
+                <i [class]="'fas fa-sign-out-alt'"></i>
+                <div class="label"> Logoff </div>
+            </div>
+        </div>
+    </div>
+</div>

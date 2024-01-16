@@ -1,0 +1,18 @@
+.topo i {
+    margin-right: 20px;
+}
+.page-template {
+    padding: 20px;
+    color: var(--cor-principal);
+}
+
+h1 {
+  text-shadow: 1px 1px 1px black;
+  color: var(--cor-principal);
+}
+
+
+h5 {
+    color: darkgrey;
+    text-shadow: none;
+}
